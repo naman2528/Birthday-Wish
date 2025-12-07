@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Moti 😂❤️</title>
+    <!-- Load Tailwind CSS and custom fonts -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Global and Animated Background Styles */
+        body {
+            font-family: 'Lato', sans-serif;
+            background: #1a0033; /* Deep Purple/Black */
+            min-height: 100vh;
+            color: #fce4ec; /* Light accent color */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Subtle background stars/dots animation for delight */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+        .star {
+            position: absolute;
+            background: #fff;
+            opacity: 0;
+            border-radius: 50%;
+            animation: twinkle 5s infinite ease-in-out;
+            box-shadow: 0 0 5px #fff;
+        }
+        @keyframes twinkle {
+            0% { opacity: 0.2; transform: scale(0.5); }
+            50% { opacity: 1; transform: scale(1); }
+            100% { opacity: 0.2; transform: scale(0.5); }
+        }
+
+        /* Container for all pages */
+        .page-container {
+            width: 100%;
+            max-width: 1100px;
+            margin: 40px auto;
+            min-height: 80vh;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 2rem;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 50px rgba(255, 51, 153, 0.3);
+            padding: 20px;
+            z-index: 10;
+        }
+
+        /* Page Transition Animation */
+        .page-content {
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+        }
+        .hidden-page {
+            opacity: 0;
+            transform: scale(0.98);
+            display: none;
+        }
+
+        /* Hero Title Font */
+        .hero-title {
+            font-family: 'Dancing Script', cursive;
+            text-shadow: 0 0 10px #ff3399, 0 0 20px #ff3399;
+            animation: neonGlow 2s infinite alternate;
+        }
+        @keyframes neonGlow {
+            from { text-shadow: 0 0 5px #ff3399, 0 0 10px #ff3399; }
+            to { text-shadow: 0 0 10px #ff66b2, 0 0 20px #ff66b2, 0 0 30px #ff3399; }
+        }
+
+        /* Custom Button Styling */
+        .glow-button {
+            background: linear-gradient(90deg, #ff3399, #8c00b3);
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(255, 51, 153, 0.5);
+            border: none;
+        }
+        .glow-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(255, 51, 153, 0.8), 0 0 30px #ff66b2;
+        }
+
+        /* Navigation Links */
+        .nav-link {
+            transition: all 0.3s;
+            cursor: pointer;
+            font-weight: 700;
+            color: #fce4ec;
+        }
+        .nav-link:hover {
+            color: #ff3399; /* Neon Pink */
+            transform: scale(1.1);
+        }
+        .nav-link.active {
+            color: #ff3399; /* Neon Pink */
+            border-bottom: 3px solid #ff3399;
+        }
+
+        /* Card Animation */
+        .animated-card {
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            transform: translateY(20px);
+            opacity: 0;
+        }
+        .animated-card.loaded {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* Confetti Animation */
+        .confetti-piece {
+            position: fixed;
+            width: 8px;
+            height: 16px;
+            background: #ff3399;
+            top: -20px;
+            opacity: 0;
+            animation: fall 5s infinite ease-out;
+            pointer-events: none;
+            z-index: 1000;
+            box-shadow: 0 0 3px #fff;
+        }
+
+        @keyframes fall {
+            0% { transform: translate(0, 0) rotate(0deg); opacity: 1; }
+            100% { transform: translate(var(--x), 110vh) rotate(1080deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body id="birthday-body">
+
+    <!-- Subtle Stars Background Animation -->
+    <div class="stars" id="star-field"></div>
+    
+    <div class="page-container" id="app-container">
+        
+        <!-- Navigation Bar -->
+        <nav class="flex justify-center space-x-4 sm:space-x-10 border-b border-pink-500/50 pb-4 mb-10 sticky top-0 bg-black/50 backdrop-blur-sm z-20 rounded-t-2xl pt-2">
+            <button class="nav-link active" data-page="home" onclick="showPage('home')">Home Greeting</button>
+            <button class="nav-link" data-page="memories" onclick="showPage('memories')">Memories Scroll</button>
+            <button class="nav-link" data-page="blessings" onclick="showPage('blessings')">My Blessings</button>
+            <button class="nav-link" data-page="gallery" onclick="showPage('gallery')">The Gallery</button>
+            <button class="nav-link" data-page="future" onclick="showPage('future')">Future Wish</button>
+        </nav>
+
+        <!-- Music Player and Controls -->
+        <div class="flex justify-center items-center mb-10 space-x-6">
+            <button id="music-toggle-btn" 
+                    class="glow-button text-white text-sm font-bold py-2 px-6 rounded-full shadow-lg transition duration-300">
+                <span id="music-icon">🎵</span> <span id="music-status-text">Play Birthday Tune</span>
+            </button>
+            <audio id="birthday-audio" loop preload="auto">
+                <!-- IMPORTANT: Replace this src with a URL to a real MP3 file -->
+                <source src="Assets/Drama Queen Hasee Toh Phasee 320 Kbps.mp3" type="audio/mp3">
+                Your browser does not support the audio element.
+            </audio>
+        </div>
+
+        <!-- ==================================== PAGE 1: HOME/MAIN GREETING (Typewriter & 3D Tilt) ==================================== -->
+        <div id="home-page" class="page-content flex flex-col items-center text-center p-6 sm:p-10">
+            <h1 class="hero-title text-6xl sm:text-9xl text-pink-500 mb-8 tracking-wide">
+                Pyaari Bhena🥹
+            </h1>
+            
+            <!-- Main Photo with 3D Tilt Effect -->
+            <div id="photo-card" class="w-64 h-64 sm:w-80 sm:h-80 mb-8 rounded-full overflow-hidden shadow-2xl border-4 border-yellow-400/80 transition-transform duration-100 ease-out transform perspective-lg cursor-pointer">
+                <!-- IMPORTANT: Replace this placeholder URL with a real photo of your sister -->
+                <img 
+                    src="Assets/photo6.jpg" 
+                    alt="A personalized photo of the birthday girl" 
+                    class="w-full h-full object-cover"
+                    onerror="this.onerror=null; this.src='https://placehold.co/800x800/8c00b3/ffffff?text=HER+PHOTO';"
+                >
+            </div>
+
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-yellow-300 mb-4">
+                A Message Typed Just For You
+            </h2>
+            <p id="typewriter-text" class="text-xl text-gray-200 mb-8 max-w-xl min-h-[4rem]">
+                <!-- Text will be typed here by JavaScript -->
+            </p>
+
+            <button id="confetti-button"
+                class="glow-button text-white font-bold py-4 px-12 rounded-full transform text-2xl tracking-widest"
+                onclick="triggerConfetti();"
+            >
+                Start The Party!
+            </button>
+        </div>
+
+        <!-- ==================================== PAGE 2: MEMORIES SCROLL ==================================== -->
+        <div id="memories-page" class="page-content hidden-page p-6 sm:p-10">
+            <h2 class="text-4xl font-extrabold text-pink-500 mb-10 text-center border-b border-pink-500/50 pb-4">Timeline of Laughter & Love</h2>
+            
+            <div class="space-y-10">
+                <!-- Memory Card 1 -->
+                <div class="animated-card bg-white/10 p-6 rounded-2xl shadow-xl border border-pink-400/50 hover:bg-white/20 transition-colors duration-300">
+                    <h3 class="text-3xl font-bold text-yellow-300 mb-2">Tere se mere school projects karwana😂</h3>
+                    <p class="text-gray-300 italic text-sm mb-4">— in summer vacations</p>
+                    <p class="text-lg leading-relaxed">
+                        In my school days, yaad hai tujhe m tere se apne school ke projects karwaya krta jaise charts banwana, models banwana, waste material se chize banwana, or holiday homework bhi karwana ye sab karwana or kabhi kabhi tu khud se ye sab kaam kar dia krti thi or kabhi kabhi ni krti thi or fir m mummy se kehta tha or fir mummy tujhe kehti thi or fir tujhe na chahte hue bhi krna padta tha or m teri help kra krta tha or wo bhi kyaa din the.
+                    </p>
+                </div>
+
+                <!-- Memory Card 2 -->
+                <div class="animated-card bg-white/10 p-6 rounded-2xl shadow-xl border border-pink-400/50 hover:bg-white/20 transition-colors duration-300">
+                    <h3 class="text-3xl font-bold text-yellow-300 mb-2">Dehradun trip🥹</h3>
+                    <p class="text-gray-300 italic text-sm mb-4">— also in summer vacations</p>
+                    <p class="text-lg leading-relaxed">
+                        Kitni badiya trip thi yaar ye, kitna maza kiaa tha appa ne kitni saari nayi jagah appa ghume the or fir appa mussorie ghumne gye the or waha enjoy kiaa, or appa jab dehradun movie dekhne gye the akele or tb baarish aa gyii thi or fir appa ne watchman ke cottage me time nikala tha ki kab baarish ruke or fir tab aapa jaaye andr per baarish rukee hi naa or fir apne ko baarish m bhigte hue jaana pada tha kuki show start hone wala tha islie.
+                    </p>
+                </div>
+                <hr>
+                <p> Waise to kaafi saari memories hai per ab saari to isme bta ni skta😂.</p>
+            </div>
+        </div>
+
+        <!-- ==================================== PAGE 3: MY BLESSINGS / WISHES ==================================== -->
+        <div id="blessings-page" class="page-content hidden-page p-6 sm:p-10">
+            <h2 class="text-4xl font-extrabold text-pink-500 mb-10 text-center border-b border-pink-500/50 pb-4">Wishes Engraved in Gold</h2>
+
+            <div class="bg-white/10 p-8 rounded-2xl shadow-2xl max-w-4xl mx-auto border border-yellow-300/50">
+                <p class="text-2xl italic text-pink-400 mb-8 text-center font-bold">
+                    May your path be paved with moments of effortless happiness, deep connection, and roaring success.
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-left text-lg text-gray-200">
+                    <div class="flex items-start space-x-3">
+                        <span class="text-2xl text-yellow-300">⭐</span>
+                        <p>I bless you with ki tu apne saare dreams pure complete kre or sada khush rahe.</p>
+                    </div>
+                    <div class="flex items-start space-x-3">
+                        <span class="text-2xl text-yellow-300">😂</span>
+                        <p>I wish you ki tu har baar mera support kare or mera saat de or vice versa.</p>
+                    </div>
+                    <div class="flex items-start space-x-3">
+                        <span class="text-2xl text-yellow-300">💖</span>
+                        <p>I bless you with ki tu hamesha healthy rahe or bhagwaan tujhe thodi sadhbuddhi pardaan kre.</p>
+                    </div>
+                    <div class="flex items-start space-x-3">
+                        <span class="text-2xl text-yellow-300">🤣</span>
+                        <p>I wish you ki tu hamehsa aise hi hasti kheltii rahe.</p>
+                    </div>
+                </div>
+
+                <p class="mt-10 text-3xl font-extrabold text-pink-500 text-right">
+                    Always rooting for you.
+                </p>
+            </div>
+        </div>
+        
+        <!-- ==================================== PAGE 4: PHOTO GALLERY ==================================== -->
+        <div id="gallery-page" class="page-content hidden-page p-6 sm:p-10">
+            <h2 class="text-4xl font-extrabold text-pink-500 mb-10 text-center border-b border-pink-500/50 pb-4">The Highlight Reel</h2>
+            
+            <p class="text-center text-gray-300 mb-8">
+                Every picture tells a thousand embarrassing stories. These are my favorites!
+            </p>
+
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-6">
+                <!-- Photo Card 1: Placeholder -->
+                <div class="rounded-xl overflow-hidden shadow-xl border-2 border-yellow-300/50 hover:scale-105 transition duration-300 aspect-square">
+                    <video controls poster="metadeta" <source src="Assets/video1.mp4" type  alt="Travel memory" class="w-full h-full object-cover">
+                </div>
+                <!-- Photo Card 2: Placeholder -->
+                <div class="rounded-xl shadow-xl border-2 border-pink-500/50 hover:scale-105 transition duration-300 aspect-square">
+                    <img src="Assets/Photo1.jpg" alt="Family memory" class="w-full h-full object-fit">
+                </div>
+                <!-- Photo Card 3: Placeholder -->
+                <div class="rounded-xl overflow-hidden shadow-xl border-2 border-yellow-300/50 hover:scale-105 transition duration-300 aspect-square">
+                    <img src="Assets/Photo2.jpg" alt="Best friends moment" class="w-full h-full object-cover">
+                </div>
+                 <!-- Photo Card 4: Placeholder -->
+                <div class="rounded-xl overflow-hidden shadow-xl border-2 border-pink-500/50 hover:scale-105 transition duration-300 aspect-square">
+                    <img src="Assets/Photo3.jpg" alt="A candid photo" class="w-70h-full object-cover">
+                </div>
+                 <!-- Photo Card 5: Placeholder -->
+                <div class="rounded-xl overflow-hidden shadow-xl border-2 border-yellow-300/50 hover:scale-105 transition duration-300 aspect-square">
+                    <img src="Assets/photo4.jpg" alt="Laughing moment" class="w-full h-full object-fit">
+                </div>
+                 <!-- Photo Card 6: Placeholder -->
+                <div class="rounded-xl overflow-hidden shadow-xl border-2 border-pink-500/50 hover:scale-105 transition duration-300 aspect-square">
+                    <img src="Assets/Photo5.jpg" alt="A photo representing the future" class="w-full h-full object-cover">
+                </div>
+                <!-- NOTE: Replace these placeholder URLs with your actual photos! -->
+            </div>
+        </div>
+
+        <!-- ==================================== PAGE 5: FUTURE WISH (New Page for surprise/planning) ==================================== -->
+        <div id="future-page" class="page-content hidden-page p-6 sm:p-10">
+            <h2 class="text-4xl font-extrabold text-pink-500 mb-10 text-center border-b border-pink-500/50 pb-4">Our Future Adventure List</h2>
+
+            <div class="bg-white/10 p-8 rounded-2xl shadow-2xl max-w-3xl mx-auto border border-pink-400/50">
+                <p class="text-lg text-gray-200 mb-6 text-center">
+                    Birthdays are about celebrating the past, but also planning the future! Here are a few things I'm committing to do with you this year:
+                </p>
+
+                <ul class="space-y-4 text-left text-xl text-yellow-300 font-semibold list-disc list-inside pl-4">
+                    <li class="hover:text-pink-500 transition duration-300">
+                        <span class="text-2xl mr-2">✈️</span> Finally plan that trip to **[kahi per bhi chal per ghumne chal bas😂]**.
+                    </li>
+                    <li class="hover:text-pink-500 transition duration-300">
+                        <span class="text-2xl mr-2">🍿</span> Binge-watch our old favorite **[like Ravan or RadhaKrishan]** with absolutely zero interruptions.
+                    </li>
+                    <li class="hover:text-pink-500 transition duration-300">
+                        <span class="text-2xl mr-2">📚</span> Apne dono ko khoob successful or khoob saara paisa kamana kuki paisa hai to sab hai.
+                    </li>
+                    <li class="hover:text-pink-500 transition duration-300">
+                        <span class="text-2xl mr-2">🍳</span> Master the art of **Maggie, Poha, Pasta, Pizza😂]** and host a dinner party.
+                    </li>
+                </ul>
+
+                <p class="mt-8 text-xl text-gray-300 text-center italic">
+                    I can't wait to make more memories with you!
+                </p>
+            </div>
+        </div>
+
+
+    </div>
+
+    <script>
+        // ==================================== CORE LOGIC & SETUP ====================================
+
+        const pages = document.querySelectorAll('.page-content');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const birthdayBody = document.body;
+        const typewriterTextElement = document.getElementById('typewriter-text');
+        
+        // --- Confetti Colors ---
+        const confettiColors = ['#ff3399', '#8c00b3', '#ff66b2', '#ffcc00', '#ffffff'];
+
+        // --- Typewriter Content ---
+        const messageToType = "Sabse pehle to Happy Birthday Moti, AvtaarDiwas ki hardhik subhkaamnaaye moti, tu sada khush reh aise hasti-khelti rahe, or kanhaji tujhe hamesha khush rakhe or sawasth rakhe, baaki tujhe thodi sadhbuddhi bhi pardaan kre, baaki tera bhai tere saath hai hamesha, or aaj tera din hai to ye meri taraf se ek chota sa tofaa tere liye. So now, Let's begin.";
+        let charIndex = 0;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            showPage('home');
+            // Generate subtle star background
+            generateStars(100); 
+        });
+
+        // ==================================== NAVIGATION & PAGE TRANSITIONS ====================================
+
+        function showPage(pageId) {
+            pages.forEach(page => {
+                page.classList.add('hidden-page');
+            });
+
+            const targetPage = document.getElementById(`${pageId}-page`);
+            if (targetPage) {
+                targetPage.classList.remove('hidden-page');
+                targetPage.style.opacity = 1;
+
+                // Special logic for animations on the current page
+                if (pageId === 'home') {
+                    // Start typewriter effect when landing on home page
+                    charIndex = 0;
+                    typewriterTextElement.textContent = '';
+                    setTimeout(typeWriter, 500); 
+                }
+                if (pageId === 'memories') {
+                    // Staggered slide-in animation for memory cards
+                    const cards = targetPage.querySelectorAll('.animated-card');
+                    cards.forEach((card, index) => {
+                        setTimeout(() => {
+                            card.classList.add('loaded');
+                        }, 200 + index * 150);
+                    });
+                }
+            }
+
+            // Update active navigation link
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.dataset.page === pageId) {
+                    link.classList.add('active');
+                }
+            });
+        }
+        
+        // ==================================== TYPEWRITER EFFECT ====================================
+        
+        function typeWriter() {
+            if (charIndex < messageToType.length) {
+                typewriterTextElement.textContent += messageToType.charAt(charIndex);
+                charIndex++;
+                setTimeout(typeWriter, 40); // typing speed
+            }
+        }
+        
+        // ==================================== 3D TILT EFFECT ON PHOTO ====================================
+        
+        const photoCard = document.getElementById('photo-card');
+        const tiltMax = 10; // Max tilt in degrees
+
+        photoCard.addEventListener('mousemove', (e) => {
+            const rect = photoCard.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+            
+            // Calculate mouse position relative to center (-1 to 1)
+            const x = (e.clientX - centerX) / (rect.width / 2);
+            const y = (e.clientY - centerY) / (rect.height / 2);
+
+            // Calculate rotation angles
+            const rotateY = tiltMax * x * -1; // Tilt left/right
+            const rotateX = tiltMax * y;      // Tilt up/down
+
+            photoCard.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+        });
+
+        photoCard.addEventListener('mouseleave', () => {
+            // Smoothly reset the tilt
+            photoCard.style.transition = 'transform 0.5s ease-out';
+            photoCard.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
+            setTimeout(() => {
+                 photoCard.style.transition = 'none'; // Remove transition for mousemove
+            }, 500);
+        });
+        
+        // ==================================== SUBTLE BACKGROUND ANIMATION ====================================
+        
+        function generateStars(count) {
+            const starField = document.getElementById('star-field');
+            for (let i = 0; i < count; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                const size = Math.random() * 2 + 1; // 1px to 3px
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                star.style.top = `${Math.random() * 100}vh`;
+                star.style.left = `${Math.random() * 100}vw`;
+                star.style.animationDelay = `${Math.random() * 5}s`;
+                starField.appendChild(star);
+            }
+        }
+
+
+        // ==================================== MUSIC PLAYER LOGIC ====================================
+
+        const audio = document.getElementById('birthday-audio');
+        const musicToggleBtn = document.getElementById('music-toggle-btn');
+        const musicStatusText = document.getElementById('music-status-text');
+        const musicIcon = document.getElementById('music-icon');
+        let isPlaying = false;
+
+        musicToggleBtn.addEventListener('click', () => {
+            if (isPlaying) {
+                audio.pause();
+                isPlaying = false;
+                musicIcon.textContent = '🎵';
+                musicStatusText.textContent = 'Play Birthday Tune';
+            } else {
+                audio.play().then(() => {
+                    isPlaying = true;
+                    musicIcon.textContent = '🎶';
+                    musicStatusText.textContent = 'Playing! (Party Mode)';
+                }).catch(error => {
+                    console.error("Audio playback failed (Requires user click):", error);
+                    musicStatusText.textContent = 'Click to Start Audio!';
+                });
+            }
+        });
+
+
+        // ==================================== CONFETTI ANIMATION ====================================
+
+        function createConfettiPiece() {
+            const piece = document.createElement('div');
+            piece.classList.add('confetti-piece');
+
+            const size = Math.random() * 10 + 5;
+            const color = confettiColors[Math.floor(Math.random() * confettiColors.length)];
+            
+            piece.style.width = `${size}px`;
+            piece.style.height = `${size * 1.5}px`;
+            piece.style.background = color;
+            piece.style.borderRadius = Math.random() > 0.5 ? '50%' : '4px';
+            
+            const startX = Math.random() * window.innerWidth;
+            piece.style.left = `${startX}px`;
+
+            // Increased randomized values for more dynamic animation
+            piece.style.setProperty('--x', `${(Math.random() - 0.5) * 800}px`); 
+            piece.style.animationDelay = `${Math.random() * 3}s`;
+            piece.style.animationDuration = `${Math.random() * 4 + 4}s`; 
+            
+            return piece;
+        }
+
+        function triggerConfetti() {
+            const confettiButton = document.getElementById('confetti-button');
+            
+            confettiButton.disabled = true;
+            confettiButton.classList.add('opacity-50');
+            confettiButton.classList.remove('glow-button');
+
+            // Spawn 200 confetti pieces
+            const totalPieces = 200;
+            let pieces = [];
+            for (let i = 0; i < totalPieces; i++) {
+                const piece = createConfettiPiece();
+                birthdayBody.appendChild(piece);
+                pieces.push(piece);
+            }
+
+            // Remove the confetti pieces and reset button
+            setTimeout(() => {
+                pieces.forEach(p => p.remove());
+                
+                confettiButton.disabled = false;
+                confettiButton.classList.remove('opacity-50');
+                confettiButton.classList.add('glow-button');
+                
+            }, 8000); // 8 seconds of epic confetti
+        }
+    </script>
+</body>
+</html>
