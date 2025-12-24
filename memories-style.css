@@ -1,0 +1,109 @@
+/* --- Memory Page Layout --- */
+.memories-page {
+    background-color: var(--background-color);
+}
+
+.memories-grid {
+    display: grid;
+    /* Responsive Grid: 2 columns on mobile, 3 on tablet, 4 on desktop */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    width: 90%;
+    max-width: 1200px;
+    margin: 40px auto;
+}
+
+/* --- Memory Card Styling --- */
+.memory-card {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    cursor: pointer;
+    
+    /* ALL TRANSITIONS GO HERE */
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), 
+                box-shadow 0.4s ease-in-out;
+    
+    /* Animation initial state */
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.memory-card:hover {
+    transform: scale(1.03) translateY(-5px); /* Lift and enlarge on hover */
+    box-shadow: 0 10px 25px rgba(var(--primary-color), 0.3);
+}
+
+.memory-img {
+    width: 100%;
+    height: 400px;
+    object-fit: fit;
+    display: block;
+    /* Image-specific transition */
+    transition: transform 0.6s ease-out;
+}
+
+.memory-card:hover .memory-img {
+    transform: scale(1.1); /* Zoom effect on image */
+}
+
+.memory-content {
+    padding: 20px;
+    text-align: left;
+}
+
+.memory-content h4 {
+    font-family: var(--font-script);
+    font-size: 1.8em;
+    color: var(--accent-color);
+    margin-bottom: 5px;
+}
+
+.memory-content p {
+    font-size: 0.9em;
+    color: var(--text-color);
+    margin-bottom: 10px;
+}
+
+.memory-date {
+    display: block;
+    font-size: 0.8em;
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+/* --- Placeholder Card Style (for the 'To Be Continued' card) --- */
+.placeholder-card {
+    background-color: var(--secondary-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.placeholder-card .memory-img {
+    display: flex;
+    overflow: inherit;
+}
+
+.placeholder-card .memory-content {
+    text-align: center;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* --- Staggered Fade-In Animation --- */
+@keyframes fadeInCard {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Apply the animation with a delay based on the custom property (--i) */
+.fadeInCard {
+    animation: fadeInCard 0.8s ease-out forwards;
+    animation-delay: calc(0.1s * var(--i)); 
+}

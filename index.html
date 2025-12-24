@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday, My Love! ❤️</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <audio id="bday-music" src="Assets/1.mp3" loop></audio>
+    <button id="music-toggle-btn" class="music-btn" title="Play/Pause Music">Play Music 🎶</button>
+
+    <header class="main-header">
+        <nav class="navbar">
+            <a href="index.html" class="nav-brand">My Love Story</a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-item">Home</a>
+                <a href="memories.html" class="nav-item">Memories</a>
+                <a href="games.html" class="nav-item">Games</a>
+                <a href="#love-letter-section" class="nav-item">Love Letter</a>
+                <a href="celebration.html" class="nav-item">Celebration</a>
+                <a href="wish.html" class="nav-item">My Wishes</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home-section" class="page-section home-page">
+            <div class="home-content">
+                <h1 class="fade-in">Happy Birthday, My Dearest!</h1>
+                <div class="heart-container">
+                    <div class="heart"></div>
+                </div>
+                <p class="fade-in-slow">Welcome to a little corner of the internet, made just for you.</p>
+            </div>
+        </section>
+
+        <section id="love-letter-section" class="page-section letter-page">
+            <h2 class="section-title">A Letter Written Just for You...</h2>
+            <div class="letter-box">
+                <pre id="typed-text"></pre>
+                <div class="cursor"></div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; Built with Love by [Nammu] | <?php echo date('Y'); ?></p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

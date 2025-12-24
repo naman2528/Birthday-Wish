@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Love Games! 🎲</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="games-style.css">
+</head>
+<body>
+
+    <audio id="bday-music" src="Assets/3.mp3" loop></audio>
+    <button id="music-toggle-btn" class="music-btn" title="Play/Pause Music">Play Music 🎶</button>
+
+    <header class="main-header">
+        <nav class="navbar">
+            <a href="index.html" class="nav-brand">My Love Story</a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-item">Home</a>
+                <a href="memories.html" class="nav-item">Memories</a>
+                <a href="games.html" class="nav-item">Games</a>
+                <a href="#love-letter-section" class="nav-item">Love Letter</a>
+                <a href="celebration.html" class="nav-item">Celebration</a>
+                <a href="wish.html" class="nav-item">My Wishes</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="games-section" class="page-section games-page">
+            <h2 class="section-title">Let's Play! Test Our Love 🕹️</h2>
+            
+            <div class="games-container">
+                
+                <div class="game-box" id="quiz-game-box">
+                    <h3>1. The Relationship Quiz</h3>
+                    <p>How well do you remember our journey? Time to find out!</p>
+                    <div id="quiz-area">
+                        <div id="quiz-question" class="quiz-question"></div>
+                        <div id="quiz-options" class="quiz-options"></div>
+                        <button id="next-btn" class="game-button hidden">Next Question</button>
+                    </div>
+                    <div id="quiz-result" class="quiz-result hidden"></div>
+                </div>
+
+                <div class="game-box" id="matching-game-box">
+                    <h3>2. Match Our Moments</h3>
+                    <p>Find the two matching cards to reveal a hidden memory!</p>
+                    <div id="matching-grid" class="matching-grid">
+                        <button class="game-button start-game-btn" id="start-match-btn">Start Matching Game</button>
+                    </div>
+                    <div id="match-status"></div>
+                </div>
+
+                <div class="game-box" id="future-game-box">
+                    <h3>3. Our Future Adventures</h3>
+                    <p>Spin the wheel to see what exciting thing we'll do next!</p>
+                    <div id="future-spinner">
+                        <button class="game-button spin-button">Spin Our Future! 🔮</button>
+                        <p id="future-outcome" class="future-outcome"></p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; Built with Love by [Your Name] | <?php echo date('Y'); ?></p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="games-logic.js"></script>
+</body>
+</html>

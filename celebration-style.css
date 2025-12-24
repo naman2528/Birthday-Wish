@@ -1,0 +1,100 @@
+/* --- Celebration Page Styling --- */
+.celebration-page {
+    background: linear-gradient(180deg, var(--background-color), var(--secondary-color));
+    height: 90vh;
+    padding-top: 100px;
+}
+
+.section-title {
+    margin-bottom: 50px;
+    animation: sparkle 1.5s infinite alternate;
+}
+
+@keyframes sparkle {
+    from { color: var(--accent-color); text-shadow: none; }
+    to { color: var(--primary-color); text-shadow: 0 0 10px rgba(255, 255, 0, 0.5); }
+}
+
+/* --- Countdown Timer Layout --- */
+.countdown-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 50px;
+}
+
+#countdown-timer {
+    display: flex;
+    gap: 30px;
+    padding: 30px;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    animation: slideInUp 1s ease-out;
+}
+
+.time-unit {
+    text-align: center;
+    font-family: var(--font-body);
+    text-transform: uppercase;
+    color: var(--primary-color);
+}
+
+.time-unit span {
+    display: block;
+    font-size: 4em;
+    font-weight: 700;
+    color: var(--accent-color);
+    line-height: 1.1;
+    /* Use a flip/grow animation on numbers for effect */
+    transition: transform 0.5s ease-out; 
+}
+
+/* --- Birthday Message Styles --- */
+#birthday-message {
+    padding: 40px;
+    background-color: var(--accent-color);
+    color: white;
+    border-radius: 15px;
+    box-shadow: 0 0 30px rgba(255, 0, 0, 0.5);
+    text-align: center;
+}
+
+#birthday-message h1 {
+    font-family: var(--font-script);
+    font-size: 5em;
+    margin-bottom: 15px;
+    animation: pulse 1s infinite alternate;
+}
+
+#birthday-message p {
+    font-size: 1.5em;
+    font-weight: 300;
+}
+
+.celebration-gif {
+    max-width: 90%;
+    max-height: 300px;
+    margin-top: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.hidden {
+    display: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    #countdown-timer {
+        flex-wrap: wrap;
+        gap: 15px;
+        padding: 20px;
+    }
+    .time-unit span {
+        font-size: 2.5em;
+    }
+    #birthday-message h1 {
+        font-size: 3em;
+    }
+}
